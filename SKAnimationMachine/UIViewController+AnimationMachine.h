@@ -37,13 +37,17 @@
 
 @end
 
+@protocol AnimationMachineProtocol <NSObject>
+- (void)finishedAnimationToState:(NSString *)stateId;
+@end
+
 @interface UIViewController (AnimationMachine)
 
 @property SKState *currentState;
 @property NSMutableDictionary *states;
+@property id<AnimationMachineProtocol> animationDelegate;
 
 - (void)addState:(SKState *)state;
-- (void)addTransition:(SKTransition *)transition;
 
 - (void)initialize:(NSString *)state;
 - (void)makeTransitionToState:(NSString *)state;

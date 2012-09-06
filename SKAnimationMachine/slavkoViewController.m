@@ -18,9 +18,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    HelperPair *pair = [HelperPair pairWithLabel:@"test" value:@"test12"];
     
-    NSLog(@"Pair je %@, %@", pair.label, pair.value);
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor blackColor];
+    view.frame = CGRectMake(100, 100, 100, 100);
+
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
