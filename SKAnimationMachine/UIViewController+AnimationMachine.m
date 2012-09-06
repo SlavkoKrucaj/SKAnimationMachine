@@ -10,8 +10,8 @@
 #import <objc/runtime.h>
 
 static char CURRENT_STATE;
-static char STATES;
 static char ANIMATION_DELEGATE;
+static char MACHINES;
 
 @implementation SKView
 
@@ -62,24 +62,28 @@ static char ANIMATION_DELEGATE;
 @implementation UIViewController (AnimationMachine)
 
 @dynamic currentState;
-@dynamic states;
 @dynamic animationDelegate;
+@dynamic machines;
 
-- (void)addState:(SKState *)state {
-    if (self.states == nil) {
-        self.states = [NSMutableDictionary dictionary];
+- (void)addState:(SKState *)state toMachine:(NSString *)machine{
+    if (self.machines == nil) self.machines = [NSMutableDictionary dictionary];
+    if ([self.machines objectForKey:machine] == nil) {
+        [self.machines setObject:[NSMutableDictionary dictionary] forKey:machine];
     }
-    [self.states setObject:state forKey:state.stateId];
-
+    [[self.machines objectForKey:machine] setObject:state forKey:state.stateId];
 }
 
-- (void)initialize:(NSString *)stateId {
-    self.currentState = [self.states objectForKey:stateId];
+- (void)initialize:(NSString *)stateId onMachine:(NSString *)machine{
+    if (self.currentState == nil) self.currentState = [NSMutableDictionary dictionary];
+    
+    [self.currentState setObject:[[self.machines objectForKey:machine] objectForKey:stateId] 
+                          forKey:machine];
 }
 
-- (void)performTransition:(NSString *)transitionId{
-    SKTransition *transition = [self.currentState.transitions objectForKey:transitionId];
-    SKState *nextState = [self.states objectForKey:transition.toStateId];
+- (void)performTransition:(NSString *)transitionId onMachine:(NSString *)machine {
+    
+    SKTransition *transition = [((SKState *)[self.currentState objectForKey:machine]).transitions objectForKey:transitionId];
+    SKState *nextState = [[self.machines objectForKey:machine] objectForKey:transition.toStateId];
     
     if (transition == nil) {
         NSLog(@"There is no transition with id %@", transitionId);
@@ -90,10 +94,9 @@ static char ANIMATION_DELEGATE;
         return;
     }
     
-    SKView *view = [nextState.views objectAtIndex:0];
-    
-    NSLog(@"%@",NSStringFromCGRect(view.frame));
-    NSLog(@"%@",view.transform);
+//    SKView *view = [nextState.views objectAtIndex:0];
+//    NSLog(@"%@",NSStringFromCGRect(view.frame));
+//    NSLog(@"%@",view.transform);
     
     [UIView animateWithDuration:transition.duration
                           delay:transition.delay
@@ -112,32 +115,24 @@ static char ANIMATION_DELEGATE;
                      completion:^(BOOL finished){
 
 
-                         NSString *nextTransition = self.currentState.nextTransition;
-                         self.currentState = nextState;
+                         NSString *nextTransition = ((SKState *)[self.currentState objectForKey:machine]).nextTransition;
+                         [self.currentState setObject:nextState forKey:machine];
                          
                          if (nextTransition != nil) {
-                             [self performTransition:nextTransition];
+                             [self performTransition:nextTransition onMachine:machine];
                          } else {
-                             [self.animationDelegate finishedAnimationToState:nextState.stateId];
+                             [self.animationDelegate finishedAnimationToState:nextState.stateId onMachine:machine];
                          }
                      }];
 
 }
 
-- (SKState *)currentState {
+- (NSMutableDictionary *)currentState {
     return objc_getAssociatedObject(self, &CURRENT_STATE);
 }
 
-- (void)setCurrentState:(SKState *)_currentState {
+- (void)setCurrentState:(NSMutableDictionary *)_currentState {
     objc_setAssociatedObject(self, &CURRENT_STATE, _currentState, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSMutableDictionary *)states {
-    return objc_getAssociatedObject(self, &STATES);
-}
-
-- (void)setStates:(NSMutableDictionary *)_states {
-    objc_setAssociatedObject(self, &STATES, _states, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id<AnimationMachineProtocol>)animationDelegate {
@@ -146,6 +141,14 @@ static char ANIMATION_DELEGATE;
 
 - (void)setAnimationDelegate:(id<AnimationMachineProtocol>)_animationDelegate {
     objc_setAssociatedObject(self, &ANIMATION_DELEGATE, _animationDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableDictionary *)machines {
+    return objc_getAssociatedObject(self, &MACHINES);
+}
+
+- (void)setMachines:(NSMutableDictionary *)_machines {
+    objc_setAssociatedObject(self, &MACHINES, _machines, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 

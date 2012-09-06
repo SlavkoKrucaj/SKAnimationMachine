@@ -60,18 +60,18 @@
 @end
 
 @protocol AnimationMachineProtocol <NSObject>
-- (void)finishedAnimationToState:(NSString *)stateId;
+- (void)finishedAnimationToState:(NSString *)stateId onMachine:(NSString *)machine;
 @end
 
 @interface UIViewController (AnimationMachine)
 
-@property SKState *currentState;
-@property NSMutableDictionary *states;
+@property NSMutableDictionary *currentState;
+@property NSMutableDictionary *machines;
 @property id<AnimationMachineProtocol> animationDelegate;
 
-- (void)addState:(SKState *)state;
+- (void)addState:(SKState *)state toMachine:(NSString *)machine;
 
-- (void)initialize:(NSString *)state;
-- (void)performTransition:(NSString *)transitionId;
+- (void)initialize:(NSString *)state onMachine:(NSString *)machine;
+- (void)performTransition:(NSString *)transitionId onMachine:(NSString *)machine;
 
 @end

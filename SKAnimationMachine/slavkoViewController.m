@@ -29,6 +29,11 @@
     view1.frame = CGRectMake(50, 50, 50, 50);
     [self.view addSubview:view1];
     
+    UIView *view2 = [[UIView alloc] init];
+    view2.backgroundColor = [UIColor orangeColor];
+    view2.frame = CGRectMake(260, 400, 50, 50);
+    [self.view addSubview:view2];
+    
     SKView *anView0 = [[SKView alloc] init];
     anView0.animatedViewId = @"1";
     anView0.animatedView = view;
@@ -52,7 +57,19 @@
     anView4.animatedView = view1;
     anView4.frame = CGRectMake(200, 50, 50, 50);
     anView4.alpha = 1;
+    
+    SKView *anView5 = [[SKView alloc] init];
+    anView5.animatedViewId = @"5";
+    anView5.animatedView = view2;
+    anView5.frame = view2.frame;
+    anView5.alpha = 0.5;
 
+    SKView *anView6 = [[SKView alloc] init];
+    anView6.animatedViewId = @"6";
+    anView6.animatedView = view2;
+    anView6.frame = CGRectMake(250, 390, 70, 70);
+    anView6.alpha = 0.5;
+    
     SKTransition *transition = [[SKTransition alloc] init];
     transition.transitionId = @"prijelaz";
     transition.fromStateId = @"state1";
@@ -67,7 +84,23 @@
     transition1.toStateId = @"state1";
     transition1.duration = 2;
     transition1.delay = 0;
-    transition1.animationCurve = UIViewAnimationCurveLinear;    
+    transition1.animationCurve = UIViewAnimationCurveLinear;  
+    
+    SKTransition *transition2 = [[SKTransition alloc] init];
+    transition2.transitionId = @"prijelaz";
+    transition2.fromStateId = @"state3";
+    transition2.toStateId = @"state4";
+    transition2.duration = 0.3;
+    transition2.delay = 0;
+    transition2.animationCurve = UIViewAnimationCurveLinear;
+    
+    SKTransition *transition3 = [[SKTransition alloc] init];
+    transition3.transitionId = @"back";
+    transition3.fromStateId = @"state4";
+    transition3.toStateId = @"state3";
+    transition3.duration = 0.3;
+    transition3.delay = 0;
+    transition3.animationCurve = UIViewAnimationCurveLinear;
     
     SKState *state = [[SKState alloc] init];
     state.stateId = @"state1";
@@ -82,12 +115,32 @@
     [state2 addView:anView4];
     [state2 addTransition:transition1];
     state2.nextTransition = @"prijelaz";
+
+    SKState *state3 = [[SKState alloc] init];
+    state3.stateId = @"state3";
+    [state3 addView:anView5];
+    [state3 addTransition:transition2];
+    state3.nextTransition = @"back";
     
-    [self addState:state];
-    [self addState:state2];
+    SKState *state4 = [[SKState alloc] init];
+    state4.stateId = @"state4";
+    [state4 addView:anView6];
+    [state4 addTransition:transition3];
+    state4.nextTransition = @"prijelaz";
+
     
-    [self initialize:state.stateId];
-    [self performTransition:@"prijelaz"];
+    [self addState:state toMachine:@"defaultMachine"];
+    [self addState:state2 toMachine:@"defaultMachine"];
+    
+    [self addState:state3 toMachine:@"newMachine"];
+    [self addState:state4 toMachine:@"newMachine"];
+    
+    [self initialize:state.stateId onMachine:@"defaultMachine"];
+    [self performTransition:@"prijelaz" onMachine:@"defaultMachine"];
+    
+    [self initialize:state3.stateId onMachine:@"newMachine"];
+    [self performTransition:@"prijelaz" onMachine:@"newMachine"];
+
 
 	// Do any additional setup after loading the view, typically from a nib.
 }
