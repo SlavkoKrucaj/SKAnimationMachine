@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9F11D6E615F8A2670070A554 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D6E515F8A2670070A554 /* UIKit.framework */; };
+		9F11D6E815F8A2670070A554 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D6E715F8A2670070A554 /* Foundation.framework */; };
+		9F11D6EA15F8A2670070A554 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D6E915F8A2670070A554 /* CoreGraphics.framework */; };
+		9F11D6F015F8A2670070A554 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F11D6EE15F8A2670070A554 /* InfoPlist.strings */; };
+		9F11D6F215F8A2670070A554 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D6F115F8A2670070A554 /* main.m */; };
+		9F11D6F615F8A2670070A554 /* slavkoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D6F515F8A2670070A554 /* slavkoAppDelegate.m */; };
+		9F11D6F915F8A2670070A554 /* slavkoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D6F815F8A2670070A554 /* slavkoViewController.m */; };
+		9F11D6FC15F8A2670070A554 /* slavkoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F11D6FA15F8A2670070A554 /* slavkoViewController_iPhone.xib */; };
+		9F11D6FF15F8A2670070A554 /* slavkoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F11D6FD15F8A2670070A554 /* slavkoViewController_iPad.xib */; };
+		9F11D70715F8A2680070A554 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D70615F8A2680070A554 /* SenTestingKit.framework */; };
+		9F11D70815F8A2680070A554 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D6E515F8A2670070A554 /* UIKit.framework */; };
+		9F11D70915F8A2680070A554 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D6E715F8A2670070A554 /* Foundation.framework */; };
+		9F11D71115F8A2680070A554 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F11D70F15F8A2680070A554 /* InfoPlist.strings */; };
+		9F11D71415F8A2680070A554 /* SKAnimationMachineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D71315F8A2680070A554 /* SKAnimationMachineTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9F11D70A15F8A2680070A554 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F11D6D815F8A2670070A554 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F11D6E015F8A2670070A554;
+			remoteInfo = SKAnimationMachine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9F11D6E115F8A2670070A554 /* SKAnimationMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKAnimationMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F11D6E515F8A2670070A554 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9F11D6E715F8A2670070A554 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9F11D6E915F8A2670070A554 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9F11D6ED15F8A2670070A554 /* SKAnimationMachine-Info.plist */ = {isa = PBXFileReference; path = "SKAnimationMachine-Info.plist"; sourceTree = "<group>"; };
+		9F11D6EF15F8A2670070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F11D6F115F8A2670070A554 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9F11D6F315F8A2670070A554 /* SKAnimationMachine-Prefix.pch */ = {isa = PBXFileReference; path = "SKAnimationMachine-Prefix.pch"; sourceTree = "<group>"; };
+		9F11D6F415F8A2670070A554 /* slavkoAppDelegate.h */ = {isa = PBXFileReference; path = slavkoAppDelegate.h; sourceTree = "<group>"; };
+		9F11D6F515F8A2670070A554 /* slavkoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slavkoAppDelegate.m; sourceTree = "<group>"; };
+		9F11D6F715F8A2670070A554 /* slavkoViewController.h */ = {isa = PBXFileReference; path = slavkoViewController.h; sourceTree = "<group>"; };
+		9F11D6F815F8A2670070A554 /* slavkoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slavkoViewController.m; sourceTree = "<group>"; };
+		9F11D6FB15F8A2670070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/slavkoViewController_iPhone.xib; sourceTree = "<group>"; };
+		9F11D6FE15F8A2670070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/slavkoViewController_iPad.xib; sourceTree = "<group>"; };
+		9F11D70515F8A2680070A554 /* SKAnimationMachineTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKAnimationMachineTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F11D70615F8A2680070A554 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		9F11D70E15F8A2680070A554 /* SKAnimationMachineTests-Info.plist */ = {isa = PBXFileReference; path = "SKAnimationMachineTests-Info.plist"; sourceTree = "<group>"; };
+		9F11D71015F8A2680070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F11D71215F8A2680070A554 /* SKAnimationMachineTests.h */ = {isa = PBXFileReference; path = SKAnimationMachineTests.h; sourceTree = "<group>"; };
+		9F11D71315F8A2680070A554 /* SKAnimationMachineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAnimationMachineTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9F11D6DE15F8A2670070A554 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F11D6E615F8A2670070A554 /* UIKit.framework in Frameworks */,
+				9F11D6E815F8A2670070A554 /* Foundation.framework in Frameworks */,
+				9F11D6EA15F8A2670070A554 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F11D70115F8A2680070A554 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F11D70715F8A2680070A554 /* SenTestingKit.framework in Frameworks */,
+				9F11D70815F8A2680070A554 /* UIKit.framework in Frameworks */,
+				9F11D70915F8A2680070A554 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9F11D6D615F8A2670070A554 = {
+			isa = PBXGroup;
+			children = (
+				9F11D6EB15F8A2670070A554 /* SKAnimationMachine */,
+				9F11D70C15F8A2680070A554 /* SKAnimationMachineTests */,
+				9F11D6E415F8A2670070A554 /* Frameworks */,
+				9F11D6E215F8A2670070A554 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9F11D6E215F8A2670070A554 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9F11D6E115F8A2670070A554 /* SKAnimationMachine.app */,
+				9F11D70515F8A2680070A554 /* SKAnimationMachineTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9F11D6E415F8A2670070A554 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F11D6E515F8A2670070A554 /* UIKit.framework */,
+				9F11D6E715F8A2670070A554 /* Foundation.framework */,
+				9F11D6E915F8A2670070A554 /* CoreGraphics.framework */,
+				9F11D70615F8A2680070A554 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F11D6EB15F8A2670070A554 /* SKAnimationMachine */ = {
+			isa = PBXGroup;
+			children = (
+				9F11D6F415F8A2670070A554 /* slavkoAppDelegate.h */,
+				9F11D6F515F8A2670070A554 /* slavkoAppDelegate.m */,
+				9F11D6F715F8A2670070A554 /* slavkoViewController.h */,
+				9F11D6F815F8A2670070A554 /* slavkoViewController.m */,
+				9F11D6FA15F8A2670070A554 /* slavkoViewController_iPhone.xib */,
+				9F11D6FD15F8A2670070A554 /* slavkoViewController_iPad.xib */,
+				9F11D6EC15F8A2670070A554 /* Supporting Files */,
+			);
+			path = SKAnimationMachine;
+			sourceTree = "<group>";
+		};
+		9F11D6EC15F8A2670070A554 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F11D6ED15F8A2670070A554 /* SKAnimationMachine-Info.plist */,
+				9F11D6EE15F8A2670070A554 /* InfoPlist.strings */,
+				9F11D6F115F8A2670070A554 /* main.m */,
+				9F11D6F315F8A2670070A554 /* SKAnimationMachine-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9F11D70C15F8A2680070A554 /* SKAnimationMachineTests */ = {
+			isa = PBXGroup;
+			children = (
+				9F11D71215F8A2680070A554 /* SKAnimationMachineTests.h */,
+				9F11D71315F8A2680070A554 /* SKAnimationMachineTests.m */,
+				9F11D70D15F8A2680070A554 /* Supporting Files */,
+			);
+			path = SKAnimationMachineTests;
+			sourceTree = "<group>";
+		};
+		9F11D70D15F8A2680070A554 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F11D70E15F8A2680070A554 /* SKAnimationMachineTests-Info.plist */,
+				9F11D70F15F8A2680070A554 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9F11D6E015F8A2670070A554 /* SKAnimationMachine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F11D71715F8A2680070A554 /* Build configuration list for PBXNativeTarget "SKAnimationMachine" */;
+			buildPhases = (
+				9F11D6DD15F8A2670070A554 /* Sources */,
+				9F11D6DE15F8A2670070A554 /* Frameworks */,
+				9F11D6DF15F8A2670070A554 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SKAnimationMachine;
+			productName = SKAnimationMachine;
+			productReference = 9F11D6E115F8A2670070A554 /* SKAnimationMachine.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9F11D70415F8A2680070A554 /* SKAnimationMachineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F11D71A15F8A2680070A554 /* Build configuration list for PBXNativeTarget "SKAnimationMachineTests" */;
+			buildPhases = (
+				9F11D70015F8A2680070A554 /* Sources */,
+				9F11D70115F8A2680070A554 /* Frameworks */,
+				9F11D70215F8A2680070A554 /* Resources */,
+				9F11D70315F8A2680070A554 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F11D70B15F8A2680070A554 /* PBXTargetDependency */,
+			);
+			name = SKAnimationMachineTests;
+			productName = SKAnimationMachineTests;
+			productReference = 9F11D70515F8A2680070A554 /* SKAnimationMachineTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9F11D6D815F8A2670070A554 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = slavko;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "slavko.krucaj@gmail.com";
+			};
+			buildConfigurationList = 9F11D6DB15F8A2670070A554 /* Build configuration list for PBXProject "SKAnimationMachine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9F11D6D615F8A2670070A554;
+			productRefGroup = 9F11D6E215F8A2670070A554 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9F11D6E015F8A2670070A554 /* SKAnimationMachine */,
+				9F11D70415F8A2680070A554 /* SKAnimationMachineTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9F11D6DF15F8A2670070A554 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F11D6F015F8A2670070A554 /* InfoPlist.strings in Resources */,
+				9F11D6FC15F8A2670070A554 /* slavkoViewController_iPhone.xib in Resources */,
+				9F11D6FF15F8A2670070A554 /* slavkoViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F11D70215F8A2680070A554 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F11D71115F8A2680070A554 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9F11D70315F8A2680070A554 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9F11D6DD15F8A2670070A554 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F11D6F215F8A2670070A554 /* main.m in Sources */,
+				9F11D6F615F8A2670070A554 /* slavkoAppDelegate.m in Sources */,
+				9F11D6F915F8A2670070A554 /* slavkoViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F11D70015F8A2680070A554 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F11D71415F8A2680070A554 /* SKAnimationMachineTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9F11D70B15F8A2680070A554 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F11D6E015F8A2670070A554 /* SKAnimationMachine */;
+			targetProxy = 9F11D70A15F8A2680070A554 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9F11D6EE15F8A2670070A554 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F11D6EF15F8A2670070A554 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9F11D6FA15F8A2670070A554 /* slavkoViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F11D6FB15F8A2670070A554 /* en */,
+			);
+			name = slavkoViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		9F11D6FD15F8A2670070A554 /* slavkoViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F11D6FE15F8A2670070A554 /* en */,
+			);
+			name = slavkoViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		9F11D70F15F8A2680070A554 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F11D71015F8A2680070A554 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9F11D71515F8A2680070A554 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9F11D71615F8A2680070A554 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9F11D71815F8A2680070A554 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKAnimationMachine/SKAnimationMachine-Prefix.pch";
+				INFOPLIST_FILE = "SKAnimationMachine/SKAnimationMachine-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9F11D71915F8A2680070A554 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKAnimationMachine/SKAnimationMachine-Prefix.pch";
+				INFOPLIST_FILE = "SKAnimationMachine/SKAnimationMachine-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9F11D71B15F8A2680070A554 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SKAnimationMachine.app/SKAnimationMachine";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKAnimationMachine/SKAnimationMachine-Prefix.pch";
+				INFOPLIST_FILE = "SKAnimationMachineTests/SKAnimationMachineTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9F11D71C15F8A2680070A554 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SKAnimationMachine.app/SKAnimationMachine";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SKAnimationMachine/SKAnimationMachine-Prefix.pch";
+				INFOPLIST_FILE = "SKAnimationMachineTests/SKAnimationMachineTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9F11D6DB15F8A2670070A554 /* Build configuration list for PBXProject "SKAnimationMachine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F11D71515F8A2680070A554 /* Debug */,
+				9F11D71615F8A2680070A554 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F11D71715F8A2680070A554 /* Build configuration list for PBXNativeTarget "SKAnimationMachine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F11D71815F8A2680070A554 /* Debug */,
+				9F11D71915F8A2680070A554 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9F11D71A15F8A2680070A554 /* Build configuration list for PBXNativeTarget "SKAnimationMachineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F11D71B15F8A2680070A554 /* Debug */,
+				9F11D71C15F8A2680070A554 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9F11D6D815F8A2670070A554 /* Project object */;
+}
