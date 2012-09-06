@@ -70,7 +70,6 @@
 @property id<AnimationMachineProtocol> animationDelegate;
 
 - (void)addState:(SKState *)state toMachine:(NSString *)machine;
-
 - (void)initialize:(NSString *)state onMachine:(NSString *)machine;
 - (void)performTransition:(NSString *)transitionId onMachine:(NSString *)machine;
 

@@ -85,18 +85,10 @@ static char MACHINES;
     SKTransition *transition = [((SKState *)[self.currentState objectForKey:machine]).transitions objectForKey:transitionId];
     SKState *nextState = [[self.machines objectForKey:machine] objectForKey:transition.toStateId];
     
-    if (transition == nil) {
-        NSLog(@"There is no transition with id %@", transitionId);
-    }
     
-    if (transition.duration == 0) {
-        NSLog(@"Duration must be > 0");
-        return;
-    }
-    
-//    SKView *view = [nextState.views objectAtIndex:0];
-//    NSLog(@"%@",NSStringFromCGRect(view.frame));
-//    NSLog(@"%@",view.transform);
+    NSAssert(transition != nil, ([NSString stringWithFormat:@"There is no transition with id %@",transitionId]));
+    NSAssert(transition.duration != 0, @"Duration must be > 0");
+    NSAssert(nextState != nil, @"There is no nextState found");
     
     [UIView animateWithDuration:transition.duration
                           delay:transition.delay
@@ -106,9 +98,12 @@ static char MACHINES;
                          for (int i=0;i<nextState.views.count;i++) {
                              SKView *view = [nextState.views objectAtIndex:i];
                              
-                             view.animatedView.frame = view.frame;
+                             if (!CGRectIsNull(view.frame)) 
+                                 view.animatedView.frame = view.frame;
+                             
+                             if (!NSStringFromCGAffineTransform(view.transform)) 
+                                 view.animatedView.transform = view.transform;
                              view.animatedView.alpha = view.alpha;
-//                             view.animatedView.transform = view.transform;
                          }
 
                      } 
