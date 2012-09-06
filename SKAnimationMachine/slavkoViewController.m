@@ -7,6 +7,7 @@
 //
 
 #import "slavkoViewController.h"
+#import "UIViewController+AnimationMachine.h"
 
 @interface slavkoViewController ()
 
@@ -17,6 +18,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    HelperPair *pair = [HelperPair pairWithLabel:@"test" value:@"test12"];
+    
+    NSLog(@"Pair je %@, %@", pair.label, pair.value);
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

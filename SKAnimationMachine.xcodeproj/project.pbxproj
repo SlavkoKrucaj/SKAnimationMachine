@@ -21,6 +21,7 @@
 		9F11D70915F8A2680070A554 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F11D6E715F8A2670070A554 /* Foundation.framework */; };
 		9F11D71115F8A2680070A554 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F11D70F15F8A2680070A554 /* InfoPlist.strings */; };
 		9F11D71415F8A2680070A554 /* SKAnimationMachineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D71315F8A2680070A554 /* SKAnimationMachineTests.m */; };
+		9F11D72315F8A2A00070A554 /* UIViewController+AnimationMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D72215F8A2A00070A554 /* UIViewController+AnimationMachine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,22 +39,24 @@
 		9F11D6E515F8A2670070A554 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9F11D6E715F8A2670070A554 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9F11D6E915F8A2670070A554 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9F11D6ED15F8A2670070A554 /* SKAnimationMachine-Info.plist */ = {isa = PBXFileReference; path = "SKAnimationMachine-Info.plist"; sourceTree = "<group>"; };
+		9F11D6ED15F8A2670070A554 /* SKAnimationMachine-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SKAnimationMachine-Info.plist"; sourceTree = "<group>"; };
 		9F11D6EF15F8A2670070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9F11D6F115F8A2670070A554 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9F11D6F315F8A2670070A554 /* SKAnimationMachine-Prefix.pch */ = {isa = PBXFileReference; path = "SKAnimationMachine-Prefix.pch"; sourceTree = "<group>"; };
-		9F11D6F415F8A2670070A554 /* slavkoAppDelegate.h */ = {isa = PBXFileReference; path = slavkoAppDelegate.h; sourceTree = "<group>"; };
+		9F11D6F315F8A2670070A554 /* SKAnimationMachine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKAnimationMachine-Prefix.pch"; sourceTree = "<group>"; };
+		9F11D6F415F8A2670070A554 /* slavkoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = slavkoAppDelegate.h; sourceTree = "<group>"; };
 		9F11D6F515F8A2670070A554 /* slavkoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slavkoAppDelegate.m; sourceTree = "<group>"; };
-		9F11D6F715F8A2670070A554 /* slavkoViewController.h */ = {isa = PBXFileReference; path = slavkoViewController.h; sourceTree = "<group>"; };
+		9F11D6F715F8A2670070A554 /* slavkoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = slavkoViewController.h; sourceTree = "<group>"; };
 		9F11D6F815F8A2670070A554 /* slavkoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slavkoViewController.m; sourceTree = "<group>"; };
 		9F11D6FB15F8A2670070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/slavkoViewController_iPhone.xib; sourceTree = "<group>"; };
 		9F11D6FE15F8A2670070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/slavkoViewController_iPad.xib; sourceTree = "<group>"; };
 		9F11D70515F8A2680070A554 /* SKAnimationMachineTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKAnimationMachineTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F11D70615F8A2680070A554 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		9F11D70E15F8A2680070A554 /* SKAnimationMachineTests-Info.plist */ = {isa = PBXFileReference; path = "SKAnimationMachineTests-Info.plist"; sourceTree = "<group>"; };
+		9F11D70E15F8A2680070A554 /* SKAnimationMachineTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SKAnimationMachineTests-Info.plist"; sourceTree = "<group>"; };
 		9F11D71015F8A2680070A554 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9F11D71215F8A2680070A554 /* SKAnimationMachineTests.h */ = {isa = PBXFileReference; path = SKAnimationMachineTests.h; sourceTree = "<group>"; };
+		9F11D71215F8A2680070A554 /* SKAnimationMachineTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKAnimationMachineTests.h; sourceTree = "<group>"; };
 		9F11D71315F8A2680070A554 /* SKAnimationMachineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKAnimationMachineTests.m; sourceTree = "<group>"; };
+		9F11D72115F8A2A00070A554 /* UIViewController+AnimationMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AnimationMachine.h"; sourceTree = "<group>"; };
+		9F11D72215F8A2A00070A554 /* UIViewController+AnimationMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AnimationMachine.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				9F11D6FA15F8A2670070A554 /* slavkoViewController_iPhone.xib */,
 				9F11D6FD15F8A2670070A554 /* slavkoViewController_iPad.xib */,
 				9F11D6EC15F8A2670070A554 /* Supporting Files */,
+				9F11D72115F8A2A00070A554 /* UIViewController+AnimationMachine.h */,
+				9F11D72215F8A2A00070A554 /* UIViewController+AnimationMachine.m */,
 			);
 			path = SKAnimationMachine;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 				9F11D6F215F8A2670070A554 /* main.m in Sources */,
 				9F11D6F615F8A2670070A554 /* slavkoAppDelegate.m in Sources */,
 				9F11D6F915F8A2670070A554 /* slavkoViewController.m in Sources */,
+				9F11D72315F8A2A00070A554 /* UIViewController+AnimationMachine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +451,7 @@
 				9F11D71915F8A2680070A554 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F11D71A15F8A2680070A554 /* Build configuration list for PBXNativeTarget "SKAnimationMachineTests" */ = {
 			isa = XCConfigurationList;
@@ -453,6 +460,7 @@
 				9F11D71C15F8A2680070A554 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
