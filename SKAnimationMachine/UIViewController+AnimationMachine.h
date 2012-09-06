@@ -11,15 +11,37 @@
 @interface SKTransition : NSObject
 
 @property NSString *transitionId;
-@property NSString *fromStateId;
 @property NSString *toStateId;
+@property NSString *fromStateId;
 @property NSTimeInterval duration;
 @property NSTimeInterval delay;
 @property UIViewAnimationCurve animationCurve;
 
 @end
 
+@interface SKView : NSObject
+
+@property NSString *animatedViewId;
+@property UIView *animatedView;
+@property CGFloat alpha;
+@property CGRect frame;
+@property CGAffineTransform transform;
+
+@end
+
 @interface SKState : NSObject
+
+@property NSMutableArray *views;
+@property NSString *stateId;
+@property NSMutableDictionary *transitions;
+@property NSString *nextTransition;
+
+- (void)addTransition:(SKTransition *)transition;
+- (void)addView:(SKView *)view;
+
+@end
+
+@interface SKGroup : NSObject
 
 @property NSString *stateId;
 @property UIView *animatedView;
@@ -50,6 +72,6 @@
 - (void)addState:(SKState *)state;
 
 - (void)initialize:(NSString *)state;
-- (void)makeTransitionToState:(NSString *)state;
+- (void)performTransition:(NSString *)transitionId;
 
 @end

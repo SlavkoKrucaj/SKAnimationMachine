@@ -13,15 +13,32 @@ static char CURRENT_STATE;
 static char STATES;
 static char ANIMATION_DELEGATE;
 
-@implementation SKState
+@implementation SKView
 
-@synthesize stateId;
+@synthesize animatedViewId;
 @synthesize animatedView;
 @synthesize alpha;
 @synthesize frame;
 @synthesize transform;
+
+@end
+
+@implementation SKState
+
+@synthesize stateId;
+@synthesize views;
 @synthesize transitions;
-@synthesize nextStateId;
+@synthesize nextTransition;
+
+- (void)addTransition:(SKTransition *)transition {
+    if (self.transitions == nil) self.transitions = [NSMutableDictionary dictionary];
+    [self.transitions setObject:transition forKey:transition.transitionId];
+}
+
+- (void)addView:(SKView *)view {
+    if (self.views == nil) self.views = [NSMutableArray array];
+    [self.views addObject:view];
+}
 
 @end
 
@@ -60,27 +77,48 @@ static char ANIMATION_DELEGATE;
     self.currentState = [self.states objectForKey:stateId];
 }
 
-- (void)makeTransitionToState:(NSString *)stateId {
-    SKTransition *transition = [self.currentState.transitions objectForKey:stateId];
-    SKState *state = [self.states objectForKey:stateId];
+- (void)performTransition:(NSString *)transitionId{
+    SKTransition *transition = [self.currentState.transitions objectForKey:transitionId];
+    SKState *nextState = [self.states objectForKey:transition.toStateId];
+    
+    if (transition == nil) {
+        NSLog(@"There is no transition with id %@", transitionId);
+    }
+    
+    if (transition.duration == 0) {
+        NSLog(@"Duration must be > 0");
+        return;
+    }
+    
+    SKView *view = [nextState.views objectAtIndex:0];
+    
+    NSLog(@"%@",NSStringFromCGRect(view.frame));
+    NSLog(@"%@",view.transform);
     
     [UIView animateWithDuration:transition.duration
                           delay:transition.delay
                         options:transition.animationCurve
                      animations:^{
-                         //za sve viewove u stateu postavi frame identity i alpha
-                         state.animatedView.frame = state.frame;
-                         state.animatedView.alpha = state.alpha;
-                         state.animatedView.transform = state.transform;
+                         
+                         for (int i=0;i<nextState.views.count;i++) {
+                             SKView *view = [nextState.views objectAtIndex:i];
+                             
+                             view.animatedView.frame = view.frame;
+                             view.animatedView.alpha = view.alpha;
+//                             view.animatedView.transform = view.transform;
+                         }
+
                      } 
                      completion:^(BOOL finished){
 
-                         self.currentState = state;
+
+                         NSString *nextTransition = self.currentState.nextTransition;
+                         self.currentState = nextState;
                          
-                         if (state.nextStateId != nil) {
-                             [self makeTransitionToState:state.nextStateId];
+                         if (nextTransition != nil) {
+                             [self performTransition:nextTransition];
                          } else {
-                             [self.animationDelegate finishedAnimationToState:stateId];
+                             [self.animationDelegate finishedAnimationToState:nextState.stateId];
                          }
                      }];
 
