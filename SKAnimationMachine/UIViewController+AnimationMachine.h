@@ -21,12 +21,10 @@
 
 @interface SKView : NSObject
 
-@property NSString *animatedViewId;
-@property UIView *animatedView;
+@property NSString *animatedViewTag;
 @property CGFloat alpha;
 @property CGRect frame;
 @property CGAffineTransform transform;
-@property BOOL hasTransformation;
 
 @end
 
@@ -42,26 +40,9 @@
 
 @end
 
-@interface SKGroup : NSObject
-
-@property NSString *stateId;
-@property UIView *animatedView;
-@property CGFloat alpha;
-@property CGRect frame;
-@property CGAffineTransform transform;
-@property NSMutableDictionary *transitions;
-@property NSString *nextStateId;
-
-@end
-
-@interface SKHelper : NSObject
-
-@property SKState *currentState;
-
-@end
-
 @protocol AnimationMachineProtocol <NSObject>
-- (void)finishedAnimationToState:(NSString *)stateId onMachine:(NSString *)machine;
+- (void)movedFromState:(NSString *)fromStateId toState:(NSString *)toStateId onMachine:(NSString *)machine;
+- (void)finishedAnimationFromState:(NSString *)fromState toState:(NSString *)stateId onMachine:(NSString *)machine;
 @end
 
 @interface UIViewController (AnimationMachine)
@@ -73,5 +54,8 @@
 - (void)addState:(SKState *)state toMachine:(NSString *)machine;
 - (void)initialize:(NSString *)state onMachine:(NSString *)machine;
 - (void)performTransition:(NSString *)transitionId onMachine:(NSString *)machine;
+- (void)goToState:(NSString *)stateId withTransition:(SKTransition *)transition onMachine:(NSString *)machine;
+- (void)stopAnimationsOnMachine:(NSString *)machine;
+- (void)initializeAnimationStateMachine;
 
 @end

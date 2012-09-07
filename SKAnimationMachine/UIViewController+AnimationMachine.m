@@ -15,8 +15,7 @@ static char MACHINES;
 
 @implementation SKView
 
-@synthesize animatedViewId;
-@synthesize animatedView;
+@synthesize animatedViewTag;
 @synthesize alpha;
 @synthesize frame;
 @synthesize transform;
@@ -50,12 +49,6 @@ static char MACHINES;
 @synthesize duration;
 @synthesize animationCurve;
 @synthesize delay;
-
-@end
-
-@implementation SKHelper
-
-@synthesize currentState;
 
 @end
 
@@ -98,28 +91,99 @@ static char MACHINES;
                          for (int i=0;i<nextState.views.count;i++) {
                              SKView *view = [nextState.views objectAtIndex:i];
                              
-                             if (!CGRectIsNull(view.frame) && !CGRectIsEmpty(view.frame)) 
-                                 view.animatedView.frame = view.frame;
-                              
-                             view.animatedView.transform = view.transform;
+                             UIView *realView = self.view;
+                             NSArray *tags = [view.animatedViewTag componentsSeparatedByString:@"."];
                              
-                             view.animatedView.alpha = view.alpha;
+                             for (NSString *tag in tags) {
+                                 realView = [realView viewWithTag:[tag intValue]];
+                             }
+                             
+                             NSAssert(realView != self.view && realView != nil, ([NSString stringWithFormat:@"There is no view with tag %@",view.animatedViewTag]));
+                                
+                             if (!CGRectIsNull(view.frame) && !CGRectIsEmpty(view.frame)) 
+                                 realView.frame = view.frame;
+                              
+                             realView.transform = view.transform;
+                             realView.alpha = view.alpha;
                          }
 
                      } 
                      completion:^(BOOL finished){
 
-
+                         NSString *oldStateId = ((SKState *)[self.currentState objectForKey:machine]).stateId;
                          NSString *nextTransition = ((SKState *)[self.currentState objectForKey:machine]).nextTransition;
                          [self.currentState setObject:nextState forKey:machine];
                          
                          if (nextTransition != nil) {
+                             [self.animationDelegate movedFromState:oldStateId toState:nextState.stateId onMachine:machine];
                              [self performTransition:nextTransition onMachine:machine];
                          } else {
-                             [self.animationDelegate finishedAnimationToState:nextState.stateId onMachine:machine];
+                             [self.animationDelegate finishedAnimationFromState:oldStateId toState:nextState.stateId onMachine:machine];
                          }
                      }];
 
+}
+
+- (void)stopAnimationsOnMachine:(NSString *)machine {
+#warning implement
+}
+
+- (void)goToState:(NSString *)stateId withTransition:(SKTransition *)transition onMachine:(NSString *)machine {
+#warning TEST
+    SKState *nextState = [[self.machines objectForKey:machine] objectForKey:stateId];
+    
+    [UIView animateWithDuration:transition.duration
+                          delay:transition.delay
+                        options:transition.animationCurve
+                     animations:^{
+                         
+                         for (int i=0;i<nextState.views.count;i++) {
+                             SKView *view = [nextState.views objectAtIndex:i];
+                             
+                             UIView *realView = self.view;
+                             NSArray *tags = [view.animatedViewTag componentsSeparatedByString:@"."];
+                             
+                             for (NSString *tag in tags) {
+                                 realView = [realView viewWithTag:[tag intValue]];
+                             }
+                             
+                             NSAssert(realView != self.view && realView != nil, ([NSString stringWithFormat:@"There is no view with tag %@",view.animatedViewTag]));
+                             
+                             if (!CGRectIsNull(view.frame) && !CGRectIsEmpty(view.frame)) 
+                                 realView.frame = view.frame;
+                             
+                             realView.transform = view.transform;
+                             realView.alpha = view.alpha;
+                         }
+                         
+                     } 
+                     completion:^(BOOL finished){
+                         
+                         NSString *oldStateId = stateId;
+                         NSString *nextTransition = nextState.nextTransition;
+                         [self.currentState setObject:nextState forKey:machine];
+                         
+                         if (nextTransition != nil) {
+                             [self.animationDelegate movedFromState:oldStateId toState:nextState.stateId onMachine:machine];
+                             [self performTransition:nextTransition onMachine:machine];
+                         } else {
+                             [self.animationDelegate finishedAnimationFromState:oldStateId toState:nextState.stateId onMachine:machine];
+                         }
+                     }];
+
+}
+
+- (void)initializeAnimationStateMachine {
+    //parsiraj json i potrpaj sve sto treba unutra device sensitive
+    NSString *device = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)? @"iphone":@"ipad";
+    NSString *resourceName = [NSString stringWithFormat:@"animation_%@_%@.json", NSStringFromClass(self.class), device];
+
+    NSString* basePath =  [[NSBundle mainBundle] pathForResource:resourceName ofType:@""];
+    NSString* content = [NSString stringWithContentsOfFile:basePath encoding:NSUTF8StringEncoding error:NULL];
+    
+    NSAssert([content length]>=2, ([NSString stringWithFormat:@"Cannot find state machine definition for resourceName: %@", resourceName]));
+
+#warning implement
 }
 
 - (NSMutableDictionary *)currentState {

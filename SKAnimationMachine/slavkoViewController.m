@@ -22,56 +22,61 @@
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor blackColor];
     view.frame = CGRectMake(100, 100, 100, 100);
+    view.tag = 1;
     [self.view addSubview:view];
     
     UIView *view1 = [[UIView alloc] init];
     view1.backgroundColor = [UIColor redColor];
     view1.frame = CGRectMake(50, 50, 50, 50);
+    view1.tag = 2;
     [self.view addSubview:view1];
     
     UIView *view2 = [[UIView alloc] init];
     view2.backgroundColor = [UIColor orangeColor];
     view2.frame = CGRectMake(260, 400, 50, 50);
+    view2.tag = 3;
     [self.view addSubview:view2];
     
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 400, 100, 50)];
+    [button setTitle:@"Press" forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor greenColor];
+    [button addTarget:self 
+               action:@selector(buttonPressed) 
+     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
     SKView *anView0 = [[SKView alloc] init];
-    anView0.animatedViewId = @"1";
-    anView0.animatedView = view;
-    anView0.frame = CGRectMake(100, 100, 100, 100);
+    anView0.animatedViewTag = @"1";
+//    anView0.frame = CGRectMake(100, 100, 100, 100);
     anView0.transform = CGAffineTransformIdentity;
     anView0.alpha = 1;
 
     SKView *anView = [[SKView alloc] init];
-    anView.animatedViewId = @"2";
-    anView.animatedView = view;
-    anView.frame = CGRectMake(100, 300, 100, 100);
-    anView.transform = CGAffineTransformIdentity;
+    anView.animatedViewTag = @"1";
+//    anView.frame = CGRectMake(100, 300, 100, 100);
+    anView.transform = CGAffineTransformRotate(CGAffineTransformScale(CGAffineTransformMakeTranslation(0, 200),1.2,1.2), M_PI);
     anView.alpha = 0.5;
     
     SKView *anView3 = [[SKView alloc] init];
-    anView3.animatedViewId = @"3";
-    anView3.animatedView = view1;
+    anView3.animatedViewTag = @"2";
     anView3.frame = CGRectMake(50, 50, 50, 50);
     anView3.transform = CGAffineTransformIdentity;
     anView3.alpha = 0.5;
     
     SKView *anView4 = [[SKView alloc] init];
-    anView4.animatedViewId = @"4";
-    anView4.animatedView = view1;
+    anView4.animatedViewTag = @"2";
     anView4.frame = CGRectMake(200, 50, 50, 50);
     anView4.transform = CGAffineTransformIdentity;
     anView4.alpha = 1;
     
     SKView *anView5 = [[SKView alloc] init];
-    anView5.animatedViewId = @"5";
-    anView5.animatedView = view2;
+    anView5.animatedViewTag = @"3";
 //    anView5.frame = view2.frame;
     anView5.transform = CGAffineTransformIdentity;
     anView5.alpha = 0.5;
 
     SKView *anView6 = [[SKView alloc] init];
-    anView6.animatedViewId = @"6";
-    anView6.animatedView = view2;
+    anView6.animatedViewTag = @"3";
 //    anView6.frame = CGRectMake(250, 390, 70, 70);
     anView6.transform = CGAffineTransformMakeScale(1.2, 1.2);
     anView6.alpha = 0.5;
@@ -88,7 +93,7 @@
     transition1.transitionId = @"back";
     transition1.fromStateId = @"state2";
     transition1.toStateId = @"state1";
-    transition1.duration = 2;
+    transition1.duration = 1;
     transition1.delay = 0;
     transition1.animationCurve = UIViewAnimationCurveLinear;  
     
@@ -120,7 +125,7 @@
     [state2 addView:anView];
     [state2 addView:anView4];
     [state2 addTransition:transition1];
-//    state2.nextTransition = @"prijelaz";
+    state2.nextTransition = @"prijelaz";
 
     SKState *state3 = [[SKState alloc] init];
     state3.stateId = @"state3";
@@ -134,6 +139,7 @@
     [state4 addTransition:transition3];
     state4.nextTransition = @"prijelaz";
 
+    self.animationDelegate = self;
     
     [self addState:state toMachine:@"defaultMachine"];
     [self addState:state2 toMachine:@"defaultMachine"];
@@ -168,4 +174,16 @@
     }
 }
 
+- (void)buttonPressed{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Test" message:@"message" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void)movedFromState:(NSString *)fromStateId toState:(NSString *)toStateId onMachine:(NSString *)machine {
+    NSLog(@"Moved from %@ to %@ on %@", fromStateId, toStateId, machine);
+}
+
+- (void)finishedAnimationFromState:(NSString *)fromState toState:(NSString *)stateId onMachine:(NSString *)machine {
+    NSLog(@"Finished from %@ to %@ on %@", fromState, stateId, machine);
+}
 @end

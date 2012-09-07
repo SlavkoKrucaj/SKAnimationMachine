@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+AnimationMachine.h"
 
-@interface slavkoViewController : UIViewController
+@interface slavkoViewController : UIViewController <AnimationMachineProtocol>
 
 @end
