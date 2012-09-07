@@ -38,36 +38,42 @@
     anView0.animatedViewId = @"1";
     anView0.animatedView = view;
     anView0.frame = CGRectMake(100, 100, 100, 100);
+    anView0.transform = CGAffineTransformIdentity;
     anView0.alpha = 1;
 
     SKView *anView = [[SKView alloc] init];
     anView.animatedViewId = @"2";
     anView.animatedView = view;
     anView.frame = CGRectMake(100, 300, 100, 100);
+    anView.transform = CGAffineTransformIdentity;
     anView.alpha = 0.5;
     
     SKView *anView3 = [[SKView alloc] init];
     anView3.animatedViewId = @"3";
     anView3.animatedView = view1;
     anView3.frame = CGRectMake(50, 50, 50, 50);
+    anView3.transform = CGAffineTransformIdentity;
     anView3.alpha = 0.5;
     
     SKView *anView4 = [[SKView alloc] init];
     anView4.animatedViewId = @"4";
     anView4.animatedView = view1;
     anView4.frame = CGRectMake(200, 50, 50, 50);
+    anView4.transform = CGAffineTransformIdentity;
     anView4.alpha = 1;
     
     SKView *anView5 = [[SKView alloc] init];
     anView5.animatedViewId = @"5";
     anView5.animatedView = view2;
-    anView5.frame = view2.frame;
+//    anView5.frame = view2.frame;
+    anView5.transform = CGAffineTransformIdentity;
     anView5.alpha = 0.5;
 
     SKView *anView6 = [[SKView alloc] init];
     anView6.animatedViewId = @"6";
     anView6.animatedView = view2;
-    anView6.frame = CGRectMake(250, 390, 70, 70);
+//    anView6.frame = CGRectMake(250, 390, 70, 70);
+    anView6.transform = CGAffineTransformMakeScale(1.2, 1.2);
     anView6.alpha = 0.5;
     
     SKTransition *transition = [[SKTransition alloc] init];
@@ -114,7 +120,7 @@
     [state2 addView:anView];
     [state2 addView:anView4];
     [state2 addTransition:transition1];
-    state2.nextTransition = @"prijelaz";
+//    state2.nextTransition = @"prijelaz";
 
     SKState *state3 = [[SKState alloc] init];
     state3.stateId = @"state3";
@@ -135,14 +141,16 @@
     [self addState:state3 toMachine:@"newMachine"];
     [self addState:state4 toMachine:@"newMachine"];
     
-    [self initialize:state.stateId onMachine:@"defaultMachine"];
-    [self performTransition:@"prijelaz" onMachine:@"defaultMachine"];
-    
+    [self initialize:state.stateId onMachine:@"defaultMachine"];    
     [self initialize:state3.stateId onMachine:@"newMachine"];
+    
+    [self performTransition:@"prijelaz" onMachine:@"defaultMachine"];
     [self performTransition:@"prijelaz" onMachine:@"newMachine"];
 
+}
 
-	// Do any additional setup after loading the view, typically from a nib.
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidUnload

@@ -98,11 +98,11 @@ static char MACHINES;
                          for (int i=0;i<nextState.views.count;i++) {
                              SKView *view = [nextState.views objectAtIndex:i];
                              
-                             if (!CGRectIsNull(view.frame)) 
+                             if (!CGRectIsNull(view.frame) && !CGRectIsEmpty(view.frame)) 
                                  view.animatedView.frame = view.frame;
+                              
+                             view.animatedView.transform = view.transform;
                              
-                             if (!NSStringFromCGAffineTransform(view.transform)) 
-                                 view.animatedView.transform = view.transform;
                              view.animatedView.alpha = view.alpha;
                          }
 

@@ -26,6 +26,7 @@
 @property CGFloat alpha;
 @property CGRect frame;
 @property CGAffineTransform transform;
+@property BOOL hasTransformation;
 
 @end
 
