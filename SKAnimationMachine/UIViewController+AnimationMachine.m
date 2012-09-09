@@ -12,6 +12,7 @@
 static char CURRENT_STATE;
 static char ANIMATION_DELEGATE;
 static char MACHINES;
+static char MACHINE_ANIMATION_RUNNER;
 
 @implementation SKView
 
@@ -27,7 +28,6 @@ static char MACHINES;
 @synthesize stateId;
 @synthesize views;
 @synthesize transitions;
-@synthesize nextTransition;
 
 - (void)addTransition:(SKTransition *)transition {
     if (self.transitions == nil) self.transitions = [NSMutableDictionary dictionary];
@@ -49,6 +49,7 @@ static char MACHINES;
 @synthesize duration;
 @synthesize animationCurve;
 @synthesize delay;
+@synthesize nextTransitionId;
 
 @end
 
@@ -57,6 +58,7 @@ static char MACHINES;
 @dynamic currentState;
 @dynamic animationDelegate;
 @dynamic machines;
+@dynamic machineAnimationRunner;
 
 - (void)addState:(SKState *)state toMachine:(NSString *)machine{
     if (self.machines == nil) self.machines = [NSMutableDictionary dictionary];
@@ -111,8 +113,14 @@ static char MACHINES;
                      completion:^(BOOL finished){
 
                          NSString *oldStateId = ((SKState *)[self.currentState objectForKey:machine]).stateId;
-                         NSString *nextTransition = ((SKState *)[self.currentState objectForKey:machine]).nextTransition;
+                         NSString *nextTransition = transition.nextTransitionId;
                          [self.currentState setObject:nextState forKey:machine];
+                         
+                         if ([[self.machineAnimationRunner objectForKey:machine] boolValue]) {
+                             [self.machineAnimationRunner setObject:[NSNumber numberWithBool:NO] forKey:machine];
+                             [self.animationDelegate forceStopedAnimationInState:nextState.stateId onMachine:machine];
+                             return;
+                         }
                          
                          if (nextTransition != nil) {
                              [self.animationDelegate movedFromState:oldStateId toState:nextState.stateId onMachine:machine];
@@ -125,11 +133,14 @@ static char MACHINES;
 }
 
 - (void)stopAnimationsOnMachine:(NSString *)machine {
-#warning implement
+    if (!self.machineAnimationRunner) {
+        self.machineAnimationRunner = [NSMutableDictionary dictionary];
+    }
+    [self.machineAnimationRunner setObject:[NSNumber numberWithBool:YES] forKey:machine];
 }
 
 - (void)goToState:(NSString *)stateId withTransition:(SKTransition *)transition onMachine:(NSString *)machine {
-#warning TEST
+    
     SKState *nextState = [[self.machines objectForKey:machine] objectForKey:stateId];
     
     [UIView animateWithDuration:transition.duration
@@ -159,8 +170,8 @@ static char MACHINES;
                      } 
                      completion:^(BOOL finished){
                          
-                         NSString *oldStateId = stateId;
-                         NSString *nextTransition = nextState.nextTransition;
+                         NSString *oldStateId = ((SKState *)[self.currentState objectForKey:machine]).stateId;
+                         NSString *nextTransition = transition.nextTransitionId;
                          [self.currentState setObject:nextState forKey:machine];
                          
                          if (nextTransition != nil) {
@@ -171,19 +182,6 @@ static char MACHINES;
                          }
                      }];
 
-}
-
-- (void)initializeAnimationStateMachine {
-    //parsiraj json i potrpaj sve sto treba unutra device sensitive
-    NSString *device = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)? @"iphone":@"ipad";
-    NSString *resourceName = [NSString stringWithFormat:@"animation_%@_%@.json", NSStringFromClass(self.class), device];
-
-    NSString* basePath =  [[NSBundle mainBundle] pathForResource:resourceName ofType:@""];
-    NSString* content = [NSString stringWithContentsOfFile:basePath encoding:NSUTF8StringEncoding error:NULL];
-    
-    NSAssert([content length]>=2, ([NSString stringWithFormat:@"Cannot find state machine definition for resourceName: %@", resourceName]));
-
-#warning implement
 }
 
 - (NSMutableDictionary *)currentState {
@@ -210,5 +208,25 @@ static char MACHINES;
     objc_setAssociatedObject(self, &MACHINES, _machines, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSMutableDictionary *)machineAnimationRunner {
+    return objc_getAssociatedObject(self, &MACHINE_ANIMATION_RUNNER);
+}
+
+- (void)setMachineAnimationRunner:(NSMutableDictionary *)_machineAnimationRunner {
+    objc_setAssociatedObject(self, &MACHINE_ANIMATION_RUNNER, _machineAnimationRunner, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)initializeAnimationStateMachine {
+    //parsiraj json i potrpaj sve sto treba unutra device sensitive
+    NSString *device = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)? @"iphone":@"ipad";
+    NSString *resourceName = [NSString stringWithFormat:@"animation_%@_%@.json", NSStringFromClass(self.class), device];
+    
+    NSString* basePath =  [[NSBundle mainBundle] pathForResource:resourceName ofType:@""];
+    NSString* content = [NSString stringWithContentsOfFile:basePath encoding:NSUTF8StringEncoding error:NULL];
+    
+    NSAssert([content length]>=2, ([NSString stringWithFormat:@"Cannot find state machine definition for resourceName: %@", resourceName]));
+    
+#warning implement
+}
 
 @end

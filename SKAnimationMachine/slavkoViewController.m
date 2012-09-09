@@ -88,6 +88,7 @@
     transition.duration = 2;
     transition.delay = 1;
     transition.animationCurve = UIViewAnimationCurveLinear;
+    transition.nextTransitionId = @"back";
     
     SKTransition *transition1 = [[SKTransition alloc] init];
     transition1.transitionId = @"back";
@@ -96,6 +97,7 @@
     transition1.duration = 1;
     transition1.delay = 0;
     transition1.animationCurve = UIViewAnimationCurveLinear;  
+    transition1.nextTransitionId = @"prijelaz";
     
     SKTransition *transition2 = [[SKTransition alloc] init];
     transition2.transitionId = @"prijelaz";
@@ -118,26 +120,22 @@
     [state addView:anView0];
     [state addView:anView3];
     [state addTransition:transition];
-    state.nextTransition = @"back";
 
     SKState *state2 = [[SKState alloc] init];
     state2.stateId = @"state2";
     [state2 addView:anView];
     [state2 addView:anView4];
     [state2 addTransition:transition1];
-    state2.nextTransition = @"prijelaz";
 
     SKState *state3 = [[SKState alloc] init];
     state3.stateId = @"state3";
     [state3 addView:anView5];
     [state3 addTransition:transition2];
-    state3.nextTransition = @"back";
     
     SKState *state4 = [[SKState alloc] init];
     state4.stateId = @"state4";
     [state4 addView:anView6];
     [state4 addTransition:transition3];
-    state4.nextTransition = @"prijelaz";
 
     self.animationDelegate = self;
     
@@ -151,7 +149,7 @@
     [self initialize:state3.stateId onMachine:@"newMachine"];
     
     [self performTransition:@"prijelaz" onMachine:@"defaultMachine"];
-    [self performTransition:@"prijelaz" onMachine:@"newMachine"];
+//    [self performTransition:@"prijelaz" onMachine:@"newMachine"];
 
 }
 
@@ -175,8 +173,27 @@
 }
 
 - (void)buttonPressed{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Test" message:@"message" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
-    [alertView show];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Test" message:@"message" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+//    [alertView show];
+    
+    [self stopAnimationsOnMachine:@"defaultMachine"];
+}
+
+- (void)forceStopedAnimationInState:(NSString *)stateId onMachine:(NSString *)machine {
+    NSLog(@"State %@ on machine %@", stateId, machine);
+    
+    SKTransition *transition = [[SKTransition alloc] init];
+    transition.duration = 0.1;
+    transition.delay = 2;
+    transition.animationCurve = UIViewAnimationCurveEaseInOut;
+    
+    if ([stateId isEqualToString:@"state1"]) {
+        transition.nextTransitionId = @"back";
+        [self goToState:@"state2" withTransition:transition onMachine:machine];
+    } else {
+        transition.nextTransitionId = @"prijelaz";
+        [self goToState:@"state1" withTransition:transition onMachine:machine];
+    }
 }
 
 - (void)movedFromState:(NSString *)fromStateId toState:(NSString *)toStateId onMachine:(NSString *)machine {

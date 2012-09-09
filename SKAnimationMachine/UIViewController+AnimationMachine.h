@@ -16,6 +16,7 @@
 @property NSTimeInterval duration;
 @property NSTimeInterval delay;
 @property UIViewAnimationCurve animationCurve;
+@property NSString *nextTransitionId;
 
 @end
 
@@ -33,7 +34,6 @@
 @property NSMutableArray *views;
 @property NSString *stateId;
 @property NSMutableDictionary *transitions;
-@property NSString *nextTransition;
 
 - (void)addTransition:(SKTransition *)transition;
 - (void)addView:(SKView *)view;
@@ -41,6 +41,7 @@
 @end
 
 @protocol AnimationMachineProtocol <NSObject>
+- (void)forceStopedAnimationInState:(NSString *)stateId onMachine:(NSString *)machine;
 - (void)movedFromState:(NSString *)fromStateId toState:(NSString *)toStateId onMachine:(NSString *)machine;
 - (void)finishedAnimationFromState:(NSString *)fromState toState:(NSString *)stateId onMachine:(NSString *)machine;
 @end
@@ -49,6 +50,7 @@
 
 @property NSMutableDictionary *currentState;
 @property NSMutableDictionary *machines;
+@property NSMutableDictionary *machineAnimationRunner;
 @property id<AnimationMachineProtocol> animationDelegate;
 
 - (void)addState:(SKState *)state toMachine:(NSString *)machine;
