@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+AnimationMachine.h"
 
-@interface slavkoViewController : UIViewController <SKAnimationMachineProtocol>
+@interface SKExampleViewController : UIViewController <SKAnimationMachineProtocol>
 
 @end

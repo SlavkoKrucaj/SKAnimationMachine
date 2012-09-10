@@ -18,13 +18,13 @@
 		9F11D72315F8A2A00070A554 /* UIViewController+AnimationMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F11D72215F8A2A00070A554 /* UIViewController+AnimationMachine.m */; };
 		9F248E3015FE6C0400EDFD80 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F248E2F15FE6C0400EDFD80 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9F248E4015FE878C00EDFD80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F248E3715FE878C00EDFD80 /* main.m */; };
-		9F248E4115FE878C00EDFD80 /* animation_slavkoViewController_iphone.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E3915FE878C00EDFD80 /* animation_slavkoViewController_iphone.json */; };
+		9F248E4115FE878C00EDFD80 /* animation_SKExampleViewController_iphone.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E3915FE878C00EDFD80 /* animation_SKExampleViewController_iphone.json */; };
 		9F248E4215FE878C00EDFD80 /* SKAnimationMachine-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E3A15FE878C00EDFD80 /* SKAnimationMachine-Info.plist */; };
-		9F248E4315FE878C00EDFD80 /* slavkoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F248E3D15FE878C00EDFD80 /* slavkoAppDelegate.m */; };
-		9F248E4415FE878C00EDFD80 /* slavkoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F248E3F15FE878C00EDFD80 /* slavkoViewController.m */; };
+		9F248E4315FE878C00EDFD80 /* SKExampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F248E3D15FE878C00EDFD80 /* SKExampleAppDelegate.m */; };
+		9F248E4415FE878C00EDFD80 /* SKExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F248E3F15FE878C00EDFD80 /* SKExampleViewController.m */; };
 		9F248E4C15FE87D000EDFD80 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E4615FE87D000EDFD80 /* InfoPlist.strings */; };
-		9F248E4D15FE87D000EDFD80 /* slavkoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E4815FE87D000EDFD80 /* slavkoViewController_iPad.xib */; };
-		9F248E4E15FE87D000EDFD80 /* slavkoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E4A15FE87D000EDFD80 /* slavkoViewController_iPhone.xib */; };
+		9F248E4D15FE87D000EDFD80 /* SKExampleViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E4815FE87D000EDFD80 /* SKExampleViewController_iPad.xib */; };
+		9F248E4E15FE87D000EDFD80 /* SKExampleViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F248E4A15FE87D000EDFD80 /* SKExampleViewController_iPhone.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,16 +53,16 @@
 		9F248E2E15FE6C0400EDFD80 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9F248E2F15FE6C0400EDFD80 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		9F248E3715FE878C00EDFD80 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9F248E3915FE878C00EDFD80 /* animation_slavkoViewController_iphone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_slavkoViewController_iphone.json; sourceTree = "<group>"; };
+		9F248E3915FE878C00EDFD80 /* animation_SKExampleViewController_iphone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_SKExampleViewController_iphone.json; sourceTree = "<group>"; };
 		9F248E3A15FE878C00EDFD80 /* SKAnimationMachine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SKAnimationMachine-Info.plist"; sourceTree = "<group>"; };
 		9F248E3B15FE878C00EDFD80 /* SKAnimationMachine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKAnimationMachine-Prefix.pch"; sourceTree = "<group>"; };
-		9F248E3C15FE878C00EDFD80 /* slavkoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slavkoAppDelegate.h; sourceTree = "<group>"; };
-		9F248E3D15FE878C00EDFD80 /* slavkoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = slavkoAppDelegate.m; sourceTree = "<group>"; };
-		9F248E3E15FE878C00EDFD80 /* slavkoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slavkoViewController.h; sourceTree = "<group>"; };
-		9F248E3F15FE878C00EDFD80 /* slavkoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = slavkoViewController.m; sourceTree = "<group>"; };
+		9F248E3C15FE878C00EDFD80 /* SKExampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SKExampleAppDelegate.h; sourceTree = "<group>"; };
+		9F248E3D15FE878C00EDFD80 /* SKExampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKExampleAppDelegate.m; sourceTree = "<group>"; };
+		9F248E3E15FE878C00EDFD80 /* SKExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKExampleViewController.h; sourceTree = "<group>"; };
+		9F248E3F15FE878C00EDFD80 /* SKExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKExampleViewController.m; sourceTree = "<group>"; };
 		9F248E4715FE87D000EDFD80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		9F248E4915FE87D000EDFD80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = slavkoViewController_iPad.xib; sourceTree = "<group>"; };
-		9F248E4B15FE87D000EDFD80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = slavkoViewController_iPhone.xib; sourceTree = "<group>"; };
+		9F248E4915FE87D000EDFD80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SKExampleViewController_iPad.xib; sourceTree = "<group>"; };
+		9F248E4B15FE87D000EDFD80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SKExampleViewController_iPhone.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,10 +173,10 @@
 				9F248E4F15FE87DF00EDFD80 /* Supporting Files */,
 				9F248E4515FE87D000EDFD80 /* en.lproj */,
 				9F248E3815FE878C00EDFD80 /* Resources */,
-				9F248E3C15FE878C00EDFD80 /* slavkoAppDelegate.h */,
-				9F248E3D15FE878C00EDFD80 /* slavkoAppDelegate.m */,
-				9F248E3E15FE878C00EDFD80 /* slavkoViewController.h */,
-				9F248E3F15FE878C00EDFD80 /* slavkoViewController.m */,
+				9F248E3C15FE878C00EDFD80 /* SKExampleAppDelegate.h */,
+				9F248E3D15FE878C00EDFD80 /* SKExampleAppDelegate.m */,
+				9F248E3E15FE878C00EDFD80 /* SKExampleViewController.h */,
+				9F248E3F15FE878C00EDFD80 /* SKExampleViewController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 		9F248E3815FE878C00EDFD80 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9F248E3915FE878C00EDFD80 /* animation_slavkoViewController_iphone.json */,
+				9F248E3915FE878C00EDFD80 /* animation_SKExampleViewController_iphone.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -192,8 +192,8 @@
 		9F248E4515FE87D000EDFD80 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				9F248E4815FE87D000EDFD80 /* slavkoViewController_iPad.xib */,
-				9F248E4A15FE87D000EDFD80 /* slavkoViewController_iPhone.xib */,
+				9F248E4815FE87D000EDFD80 /* SKExampleViewController_iPad.xib */,
+				9F248E4A15FE87D000EDFD80 /* SKExampleViewController_iPhone.xib */,
 			);
 			path = en.lproj;
 			sourceTree = "<group>";
@@ -281,11 +281,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F248E4115FE878C00EDFD80 /* animation_slavkoViewController_iphone.json in Resources */,
+				9F248E4115FE878C00EDFD80 /* animation_SKExampleViewController_iphone.json in Resources */,
 				9F248E4215FE878C00EDFD80 /* SKAnimationMachine-Info.plist in Resources */,
 				9F248E4C15FE87D000EDFD80 /* InfoPlist.strings in Resources */,
-				9F248E4D15FE87D000EDFD80 /* slavkoViewController_iPad.xib in Resources */,
-				9F248E4E15FE87D000EDFD80 /* slavkoViewController_iPhone.xib in Resources */,
+				9F248E4D15FE87D000EDFD80 /* SKExampleViewController_iPad.xib in Resources */,
+				9F248E4E15FE87D000EDFD80 /* SKExampleViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,8 +323,8 @@
 				9F11D72315F8A2A00070A554 /* UIViewController+AnimationMachine.m in Sources */,
 				9F248E3015FE6C0400EDFD80 /* JSONKit.m in Sources */,
 				9F248E4015FE878C00EDFD80 /* main.m in Sources */,
-				9F248E4315FE878C00EDFD80 /* slavkoAppDelegate.m in Sources */,
-				9F248E4415FE878C00EDFD80 /* slavkoViewController.m in Sources */,
+				9F248E4315FE878C00EDFD80 /* SKExampleAppDelegate.m in Sources */,
+				9F248E4415FE878C00EDFD80 /* SKExampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,20 +364,20 @@
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
-		9F248E4815FE87D000EDFD80 /* slavkoViewController_iPad.xib */ = {
+		9F248E4815FE87D000EDFD80 /* SKExampleViewController_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9F248E4915FE87D000EDFD80 /* en */,
 			);
-			name = slavkoViewController_iPad.xib;
+			name = SKExampleViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
-		9F248E4A15FE87D000EDFD80 /* slavkoViewController_iPhone.xib */ = {
+		9F248E4A15FE87D000EDFD80 /* SKExampleViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9F248E4B15FE87D000EDFD80 /* en */,
 			);
-			name = slavkoViewController_iPhone.xib;
+			name = SKExampleViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -6,11 +6,11 @@
 //  Copyright (c) 2012. slavko.krucaj@gmail.com. All rights reserved.
 //
 
-#import "slavkoAppDelegate.h"
+#import "SKExampleAppDelegate.h"
 
-#import "slavkoViewController.h"
+#import "SKExampleViewController.h"
 
-@implementation slavkoAppDelegate
+@implementation SKExampleAppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
@@ -20,9 +20,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[slavkoViewController alloc] initWithNibName:@"slavkoViewController_iPhone" bundle:nil];
+        self.viewController = [[SKExampleViewController alloc] initWithNibName:@"slavkoViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[slavkoViewController alloc] initWithNibName:@"slavkoViewController_iPad" bundle:nil];
+        self.viewController = [[SKExampleViewController alloc] initWithNibName:@"slavkoViewController_iPad" bundle:nil];
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

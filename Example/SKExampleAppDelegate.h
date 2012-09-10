@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class slavkoViewController;
+@class SKExampleViewController;
 
-@interface slavkoAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SKExampleAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) slavkoViewController *viewController;
+@property (strong, nonatomic) SKExampleViewController *viewController;
 
 @end

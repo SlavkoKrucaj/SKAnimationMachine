@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "slavkoAppDelegate.h"
+#import "SKExampleAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([slavkoAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SKExampleAppDelegate class]));
     }
 }

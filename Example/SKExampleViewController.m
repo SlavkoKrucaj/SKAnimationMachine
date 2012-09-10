@@ -6,14 +6,14 @@
 //  Copyright (c) 2012. slavko.krucaj@gmail.com. All rights reserved.
 //
 
-#import "slavkoViewController.h"
+#import "SKExampleViewController.h"
 #import "UIViewController+AnimationMachine.h"
 
-@interface slavkoViewController ()
+@interface SKExampleViewController ()
 
 @end
 
-@implementation slavkoViewController
+@implementation SKExampleViewController
 
 - (void)viewDidLoad
 {
