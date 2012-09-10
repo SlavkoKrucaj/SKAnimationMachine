@@ -8,11 +8,24 @@
 
 #import "UIViewController+AnimationMachine.h"
 #import <objc/runtime.h>
+#import "JSONKit.h"
+
+#define kAffineIdentity 0
+#define kAffineRotation 1
+#define kAffineScale 2
+#define kAffineTranslate 3
+
+#define kEaseIn 0
+#define kEaseOut 1
+#define kEaseInOut 2
+#define kLinear 3
+
 
 static char CURRENT_STATE;
 static char ANIMATION_DELEGATE;
 static char MACHINES;
 static char MACHINE_ANIMATION_RUNNER;
+static char MACHINE_RUNNER;
 
 @implementation SKView
 
@@ -21,6 +34,10 @@ static char MACHINE_ANIMATION_RUNNER;
 @synthesize frame;
 @synthesize transform;
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"tag: %@, alpha: %f, frame: %@, transform: %@", animatedViewTag, alpha, NSStringFromCGRect(frame),@"nesto"];
+}
+
 @end
 
 @implementation SKState
@@ -28,6 +45,7 @@ static char MACHINE_ANIMATION_RUNNER;
 @synthesize stateId;
 @synthesize views;
 @synthesize transitions;
+@synthesize initial;
 
 - (void)addTransition:(SKTransition *)transition {
     if (self.transitions == nil) self.transitions = [NSMutableDictionary dictionary];
@@ -39,12 +57,15 @@ static char MACHINE_ANIMATION_RUNNER;
     [self.views addObject:view];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"state Id:%@, views:%@, transitions:%@",self.stateId,self.views,self.transitions];
+}
+
 @end
 
 @implementation SKTransition
 
 @synthesize transitionId;
-@synthesize fromStateId;
 @synthesize toStateId;
 @synthesize duration;
 @synthesize animationCurve;
@@ -59,6 +80,7 @@ static char MACHINE_ANIMATION_RUNNER;
 @dynamic animationDelegate;
 @dynamic machines;
 @dynamic machineAnimationRunner;
+@dynamic machineRunning;
 
 - (void)addState:(SKState *)state toMachine:(NSString *)machine{
     if (self.machines == nil) self.machines = [NSMutableDictionary dictionary];
@@ -77,9 +99,11 @@ static char MACHINE_ANIMATION_RUNNER;
 
 - (void)performTransition:(NSString *)transitionId onMachine:(NSString *)machine {
     
+    if (self.machineRunning == nil) self.machineRunning = [NSMutableDictionary dictionary];
+    [self.machineRunning setObject:[NSNumber numberWithBool:YES] forKey:machine];
+    
     SKTransition *transition = [((SKState *)[self.currentState objectForKey:machine]).transitions objectForKey:transitionId];
     SKState *nextState = [[self.machines objectForKey:machine] objectForKey:transition.toStateId];
-    
     
     NSAssert(transition != nil, ([NSString stringWithFormat:@"There is no transition with id %@",transitionId]));
     NSAssert(transition.duration != 0, @"Duration must be > 0");
@@ -117,6 +141,7 @@ static char MACHINE_ANIMATION_RUNNER;
                          [self.currentState setObject:nextState forKey:machine];
                          
                          if ([[self.machineAnimationRunner objectForKey:machine] boolValue]) {
+                             [self.machineRunning setObject:[NSNumber numberWithBool:NO] forKey:machine];
                              [self.machineAnimationRunner setObject:[NSNumber numberWithBool:NO] forKey:machine];
                              [self.animationDelegate forceStopedAnimationInState:nextState.stateId onMachine:machine];
                              return;
@@ -126,6 +151,7 @@ static char MACHINE_ANIMATION_RUNNER;
                              [self.animationDelegate movedFromState:oldStateId toState:nextState.stateId onMachine:machine];
                              [self performTransition:nextTransition onMachine:machine];
                          } else {
+                             [self.machineRunning setObject:[NSNumber numberWithBool:NO] forKey:machine];
                              [self.animationDelegate finishedAnimationFromState:oldStateId toState:nextState.stateId onMachine:machine];
                          }
                      }];
@@ -140,6 +166,9 @@ static char MACHINE_ANIMATION_RUNNER;
 }
 
 - (void)goToState:(NSString *)stateId withTransition:(SKTransition *)transition onMachine:(NSString *)machine {
+    
+    if (self.machineRunning == nil) self.machineRunning = [NSMutableDictionary dictionary];
+    [self.machineRunning setObject:[NSNumber numberWithBool:YES] forKey:machine];
     
     SKState *nextState = [[self.machines objectForKey:machine] objectForKey:stateId];
     
@@ -178,6 +207,7 @@ static char MACHINE_ANIMATION_RUNNER;
                              [self.animationDelegate movedFromState:oldStateId toState:nextState.stateId onMachine:machine];
                              [self performTransition:nextTransition onMachine:machine];
                          } else {
+                                 [self.machineRunning setObject:[NSNumber numberWithBool:NO] forKey:machine];
                              [self.animationDelegate finishedAnimationFromState:oldStateId toState:nextState.stateId onMachine:machine];
                          }
                      }];
@@ -192,11 +222,11 @@ static char MACHINE_ANIMATION_RUNNER;
     objc_setAssociatedObject(self, &CURRENT_STATE, _currentState, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id<AnimationMachineProtocol>)animationDelegate {
+- (id<SKAnimationMachineProtocol>)animationDelegate {
     return objc_getAssociatedObject(self, &ANIMATION_DELEGATE);
 }
 
-- (void)setAnimationDelegate:(id<AnimationMachineProtocol>)_animationDelegate {
+- (void)setAnimationDelegate:(id<SKAnimationMachineProtocol>)_animationDelegate {
     objc_setAssociatedObject(self, &ANIMATION_DELEGATE, _animationDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -216,8 +246,79 @@ static char MACHINE_ANIMATION_RUNNER;
     objc_setAssociatedObject(self, &MACHINE_ANIMATION_RUNNER, _machineAnimationRunner, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSMutableDictionary *)machineRunning {
+    return objc_getAssociatedObject(self, &MACHINE_RUNNER);
+}
+
+- (void)setMachineRunning:(NSMutableDictionary *)_machineRunner {
+    objc_setAssociatedObject(self, &MACHINE_RUNNER, _machineRunner, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (SKView *)parseView:(NSDictionary *)view {
+    SKView *skView = [[SKView alloc] init];
+    skView.animatedViewTag = [view objectForKey:@"animatedViewTag"];
+    skView.alpha = [[view objectForKey:@"alpha"] floatValue];
+    skView.frame = CGRectFromString([view objectForKey:@"rect"]);
+    
+    CGAffineTransform affineTransformation = CGAffineTransformIdentity;
+    
+    for (NSDictionary *transform in [view objectForKey:@"transformations"]) {
+        int transformationId = [[transform objectForKey:@"id"] intValue];
+        
+        if (transformationId == kAffineIdentity) 
+        
+            affineTransformation = CGAffineTransformIdentity;
+        
+        else if (transformationId == kAffineRotation) {
+
+            int alpha = [[transform objectForKey:@"alpha"] intValue] / 180.;
+            affineTransformation = CGAffineTransformRotate(affineTransformation, alpha*M_PI); 
+        
+        } else if (transformationId == kAffineScale) {
+            
+            double sx = [[transform objectForKey:@"sx"] doubleValue];
+            double sy = [[transform objectForKey:@"sy"] doubleValue];
+            
+            affineTransformation = CGAffineTransformScale(affineTransformation, sx, sy);
+            
+        } else if (transformationId == kAffineTranslate) {
+        
+            double tx = [[transform objectForKey:@"tx"] doubleValue];
+            double ty = [[transform objectForKey:@"ty"] doubleValue];
+            
+            affineTransformation = CGAffineTransformTranslate(affineTransformation, tx, ty);
+            
+        }
+    }
+    
+    skView.transform = affineTransformation;
+    
+    return skView;
+}
+
+- (SKTransition *)parseTransition:(NSDictionary *)transition {
+    SKTransition *skTransition = [[SKTransition alloc] init];
+    skTransition.transitionId = [transition objectForKey:@"transitionId"];
+    skTransition.toStateId = [transition objectForKey:@"toStateId"];
+    skTransition.duration = [[transition objectForKey:@"duration"] doubleValue];
+    skTransition.delay = [[transition objectForKey:@"delay"] doubleValue];
+    skTransition.nextTransitionId = [transition objectForKey:@"nextTransitionId"];
+    
+    int easingCurveId = [[transition objectForKey:@"animationCurve"] intValue];
+    switch (easingCurveId) {
+        case kEaseIn:skTransition.animationCurve = UIViewAnimationCurveEaseIn;break;
+        case kEaseOut:skTransition.animationCurve = UIViewAnimationCurveEaseOut;break;
+        case kEaseInOut:skTransition.animationCurve = UIViewAnimationCurveEaseInOut;break;
+        case kLinear:skTransition.animationCurve = UIViewAnimationCurveLinear;break;
+            
+        default:skTransition.animationCurve = UIViewAnimationCurveEaseInOut;
+    }
+    
+    return skTransition;
+}
+
 - (void)initializeAnimationStateMachine {
-    //parsiraj json i potrpaj sve sto treba unutra device sensitive
+
     NSString *device = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)? @"iphone":@"ipad";
     NSString *resourceName = [NSString stringWithFormat:@"animation_%@_%@.json", NSStringFromClass(self.class), device];
     
@@ -226,7 +327,41 @@ static char MACHINE_ANIMATION_RUNNER;
     
     NSAssert([content length]>=2, ([NSString stringWithFormat:@"Cannot find state machine definition for resourceName: %@", resourceName]));
     
-#warning implement
+    NSArray *machines = [content objectFromJSONString];
+    for (NSDictionary *machine in machines) {
+        
+        NSString *machineId = [machine objectForKey:@"machine"];
+        NSArray *states = [machine objectForKey:@"states"];
+        
+        for (NSDictionary *state in states) {
+            
+            SKState *skState = [[SKState alloc] init];
+            skState.stateId = [state objectForKey:@"stateId"];
+            skState.initial = [[state objectForKey:@"initial"] boolValue];
+            
+            for (NSDictionary *viewInState in [state objectForKey:@"views"])
+                [skState addView:[self parseView:viewInState]];
+
+            for (NSDictionary *transitionInState in [state objectForKey:@"transitions"])
+                [skState addTransition:[self parseTransition:transitionInState]];
+            
+            [self addState:skState toMachine:machineId];
+
+            if (skState.initial) {
+                [self initialize:skState.stateId onMachine:machineId];
+            }
+        }
+        
+    }
+}
+
+- (BOOL)animationRunningOnMachine:(NSString *)machine {
+    return [[self.machineRunning objectForKey:machine] boolValue];
+}
+
+- (void)initializeAnimationStateMachineWithDelegate:(id<SKAnimationMachineProtocol>)delegate {
+    [self initializeAnimationStateMachine];
+    self.animationDelegate = delegate;
 }
 
 @end

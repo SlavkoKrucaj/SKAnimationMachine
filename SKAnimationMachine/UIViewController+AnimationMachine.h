@@ -12,7 +12,6 @@
 
 @property NSString *transitionId;
 @property NSString *toStateId;
-@property NSString *fromStateId;
 @property NSTimeInterval duration;
 @property NSTimeInterval delay;
 @property UIViewAnimationCurve animationCurve;
@@ -31,6 +30,7 @@
 
 @interface SKState : NSObject
 
+@property BOOL initial;
 @property NSMutableArray *views;
 @property NSString *stateId;
 @property NSMutableDictionary *transitions;
@@ -40,7 +40,7 @@
 
 @end
 
-@protocol AnimationMachineProtocol <NSObject>
+@protocol SKAnimationMachineProtocol <NSObject>
 - (void)forceStopedAnimationInState:(NSString *)stateId onMachine:(NSString *)machine;
 - (void)movedFromState:(NSString *)fromStateId toState:(NSString *)toStateId onMachine:(NSString *)machine;
 - (void)finishedAnimationFromState:(NSString *)fromState toState:(NSString *)stateId onMachine:(NSString *)machine;
@@ -51,7 +51,9 @@
 @property NSMutableDictionary *currentState;
 @property NSMutableDictionary *machines;
 @property NSMutableDictionary *machineAnimationRunner;
-@property id<AnimationMachineProtocol> animationDelegate;
+@property NSMutableDictionary *machineRunning;
+
+@property id<SKAnimationMachineProtocol> animationDelegate;
 
 - (void)addState:(SKState *)state toMachine:(NSString *)machine;
 - (void)initialize:(NSString *)state onMachine:(NSString *)machine;
@@ -59,5 +61,7 @@
 - (void)goToState:(NSString *)stateId withTransition:(SKTransition *)transition onMachine:(NSString *)machine;
 - (void)stopAnimationsOnMachine:(NSString *)machine;
 - (void)initializeAnimationStateMachine;
+- (void)initializeAnimationStateMachineWithDelegate:(id<SKAnimationMachineProtocol>)delegate;
+- (BOOL)animationRunningOnMachine:(NSString *)machine;
 
 @end

@@ -1,83 +1,131 @@
 [
 	{
-		"machine":"",
+		"machine":"machine1",
 		"states":[
 			{
 				"stateId":"state1",
+				"initial":true,
 				"views":[
 					{
-						"animatedViewId":"",
-						"animatedView":"",
-						"alpha":0.5,
-						"rect":[0,1,2,3],
+						"animatedViewTag":"1",
+						"alpha":1,
+						"rect":"",
 						"transformations":[
 							{
-								"id":"1",
-								"x":"",
-								"y":"",
-								"width":"",
-								"height":"",
-								"angle":"",
-								"scaleFactor":""
-							},
-							{
-								"id":"1",
-								"x":"",
-								"y":"",
-								"width":"",
-								"height":"",
-								"angle":"",
-								"scaleFactor":""
+								"id":0
 							}
 						]
 					},
 					{
-						"animatedViewId":"",
-						"animatedView":"",
-						"alpha":0.5,
-						"rect":[0,1,2,3],
+						"animatedViewTag":"2",
+						"alpha":1,
+						"rect":"{{50,50},{50,50}}",
 						"transformations":[]
 					}
+					
 				],
 				"transitions":[
 					{
-						"transitionId":"prijelaz",
-						"toStateId":"",
-						"fromStateId":"",
+						"transitionId":"forward",
+						"toStateId":"state2",
 						"duration":1,
 						"delay":0,
-						"animationCurve":"EaseOut",
-						"nextTransitionId":"tranzicija"
+						"animationCurve":2,
+						"nextTransitionId":"back"
 					}
 				]
 			},
 			{
-				"stateId":"state1",
+				"stateId":"state2",
+				"initial":false,
 				"views":[
 					{
-						"animatedViewId":"",
-						"animatedView":"",
+						"animatedViewTag":"1",
 						"alpha":0.5,
-						"rect":[0,1,2,3],
-						"transformations":[]
+						"rect":"",
+						"transformations":[
+							{
+								"id":3,
+								"tx":0,
+								"ty":200
+							},
+							{
+								"id":2,
+								"sx":1.2,
+								"sy":1.2
+							},
+							{
+								"id":1,
+								"alpha":180
+							}
+						]
 					},
 					{
-						"animatedViewId":"",
-						"animatedView":"",
-						"alpha":0.5,
-						"rect":[0,1,2,3],
+						"animatedViewTag":"2",
+						"alpha":0.2,
+						"rect":"{{200,50},{50,50}}",
 						"transformations":[]
 					}
 				],
 				"transitions":[
 					{
-						"transitionId":"prijelaz",
-						"toStateId":"",
-						"fromStateId":"",
-						"duration":1,
+						"transitionId":"back",
+						"toStateId":"state1",
+						"duration":0.5,
+						"delay":1,
+						"animationCurve":2,
+						"nextTransitionId":"forward"
+					}
+				]
+			}
+		]
+	},
+	{
+		"machine":"machine2",
+		"states":[
+			{
+				"stateId":"state1",
+				"initial":true,
+				"views":[
+					{
+						"animatedViewTag":"3",
+						"alpha":1,
+						"rect":"{{260,400},{50,50}}",
+						"transformations":[]
+					}
+				
+				],
+				"transitions":[
+					{
+						"transitionId":"forward",
+						"toStateId":"state2",
+						"duration":0.3,
 						"delay":0,
-						"animationCurve":"EaseOut",
-						"nextTransition":"tranzicija"
+						"animationCurve":3,
+						"nextTransitionId":"back"
+					}
+				]
+			},
+			{
+				"stateId":"state2",
+				"initial":false,
+				"views":[
+					{
+						"animatedViewTag":"3",
+						"alpha":1,
+						"rect":"{{250,390},{70,70}}",
+						"transformations":[]
+					}
+				
+				],
+				"transitions":[
+					{
+						"transitionId":"back",
+						"toStateId":"state1",
+						"duration":0.3,
+						"delay":0,
+						"animationCurve":3,
+						"nextTransitionId":"forward"
 					}
 				]
 			}
