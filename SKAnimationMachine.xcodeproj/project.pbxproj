@@ -56,7 +56,7 @@
 		9F248E3915FE878C00EDFD80 /* animation_SKExampleViewController_iphone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_SKExampleViewController_iphone.json; sourceTree = "<group>"; };
 		9F248E3A15FE878C00EDFD80 /* SKAnimationMachine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SKAnimationMachine-Info.plist"; sourceTree = "<group>"; };
 		9F248E3B15FE878C00EDFD80 /* SKAnimationMachine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKAnimationMachine-Prefix.pch"; sourceTree = "<group>"; };
-		9F248E3C15FE878C00EDFD80 /* SKExampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SKExampleAppDelegate.h; sourceTree = "<group>"; };
+		9F248E3C15FE878C00EDFD80 /* SKExampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKExampleAppDelegate.h; sourceTree = "<group>"; };
 		9F248E3D15FE878C00EDFD80 /* SKExampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKExampleAppDelegate.m; sourceTree = "<group>"; };
 		9F248E3E15FE878C00EDFD80 /* SKExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKExampleViewController.h; sourceTree = "<group>"; };
 		9F248E3F15FE878C00EDFD80 /* SKExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKExampleViewController.m; sourceTree = "<group>"; };

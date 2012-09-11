@@ -24,7 +24,6 @@
 static char CURRENT_STATE;
 static char ANIMATION_DELEGATE;
 static char MACHINES;
-static char MACHINE_ANIMATION_RUNNER;
 static char MACHINE_RUNNER;
 
 @implementation SKView
@@ -33,10 +32,6 @@ static char MACHINE_RUNNER;
 @synthesize alpha;
 @synthesize frame;
 @synthesize transform;
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"tag: %@, alpha: %f, frame: %@, transform: %@", animatedViewTag, alpha, NSStringFromCGRect(frame),@"nesto"];
-}
 
 @end
 
@@ -57,10 +52,6 @@ static char MACHINE_RUNNER;
     [self.views addObject:view];
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"state Id:%@, views:%@, transitions:%@",self.stateId,self.views,self.transitions];
-}
-
 @end
 
 @implementation SKTransition
@@ -79,7 +70,6 @@ static char MACHINE_RUNNER;
 @dynamic currentState;
 @dynamic animationDelegate;
 @dynamic machines;
-@dynamic machineAnimationRunner;
 @dynamic machineRunning;
 
 - (void)addState:(SKState *)state toMachine:(NSString *)machine{
@@ -140,9 +130,8 @@ static char MACHINE_RUNNER;
                          NSString *nextTransition = transition.nextTransitionId;
                          [self.currentState setObject:nextState forKey:machine];
                          
-                         if ([[self.machineAnimationRunner objectForKey:machine] boolValue]) {
+                         if (![[self.machineRunning objectForKey:machine] boolValue]) {
                              [self.machineRunning setObject:[NSNumber numberWithBool:NO] forKey:machine];
-                             [self.machineAnimationRunner setObject:[NSNumber numberWithBool:NO] forKey:machine];
                              [self.animationDelegate forceStopedAnimationInState:nextState.stateId onMachine:machine];
                              return;
                          }
@@ -159,10 +148,10 @@ static char MACHINE_RUNNER;
 }
 
 - (void)stopAnimationsOnMachine:(NSString *)machine {
-    if (!self.machineAnimationRunner) {
-        self.machineAnimationRunner = [NSMutableDictionary dictionary];
+    if (!self.machineRunning) {
+        self.machineRunning = [NSMutableDictionary dictionary];
     }
-    [self.machineAnimationRunner setObject:[NSNumber numberWithBool:YES] forKey:machine];
+    [self.machineRunning setObject:[NSNumber numberWithBool:NO] forKey:machine];
 }
 
 - (void)goToState:(NSString *)stateId withTransition:(SKTransition *)transition onMachine:(NSString *)machine {
@@ -236,14 +225,6 @@ static char MACHINE_RUNNER;
 
 - (void)setMachines:(NSMutableDictionary *)_machines {
     objc_setAssociatedObject(self, &MACHINES, _machines, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSMutableDictionary *)machineAnimationRunner {
-    return objc_getAssociatedObject(self, &MACHINE_ANIMATION_RUNNER);
-}
-
-- (void)setMachineAnimationRunner:(NSMutableDictionary *)_machineAnimationRunner {
-    objc_setAssociatedObject(self, &MACHINE_ANIMATION_RUNNER, _machineAnimationRunner, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableDictionary *)machineRunning {

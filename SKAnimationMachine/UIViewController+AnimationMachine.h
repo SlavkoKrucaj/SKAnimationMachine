@@ -50,7 +50,6 @@
 
 @property NSMutableDictionary *currentState;
 @property NSMutableDictionary *machines;
-@property NSMutableDictionary *machineAnimationRunner;
 @property NSMutableDictionary *machineRunning;
 
 @property id<SKAnimationMachineProtocol> animationDelegate;

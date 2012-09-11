@@ -71,12 +71,7 @@
 
 - (void)buttonPressed:(UIButton *)button{
 
-
-    if (![self animationRunningOnMachine:@"machine2"]) {
-        [self performTransition:@"forward" onMachine:@"machine2"];
-    } else {
-        [self stopAnimationsOnMachine:@"machine2"];
-    }
+    [self stopAnimationsOnMachine:@"machine1"];
     
 }
 
