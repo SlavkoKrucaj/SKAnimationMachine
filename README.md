@@ -1,11 +1,14 @@
 SKAnimationMachine
 ==================
 
-`SKAnimationStateMachine` is simple category for `UIViewController` which allows you to externalize code for your animations done in that view. </br>
+`SKAnimationStateMachine` is simple category for `UIViewController` which allows you to externalize code for your animations done in that view.
+
 Basic idea was to create state machine for UIView. Basically you can define your states, by specifiying locations of views and its properties in different states in JSON. State definition is done in JSON (structure is explained later). When you have states defined you also define in which states you can go from that state and with what transition.
-`SKAnimationStateMachine` supports, normal transformations with all properties duration, list of identityTransforms, frame transformation, alpha. Also it supports sequntial animations, which are animations that have to be doen in one step.</br>
-It also has support for having mulitple `SKAnimationMachine`s in one viewController, so you can have parallel animations going on. Also you can define different machines on **iphone and ipad** for the same viewController. </br>
-Great thing about this is that it reduces code nedded for animations to few lines
+`SKAnimationStateMachine` supports, normal transformations with all properties duration, list of identityTransforms, frame transformation, alpha. Also it supports sequntial animations, which are animations that have to be doen in one step.
+
+It also has support for having mulitple `SKAnimationMachine`s in one viewController, so you can have parallel animations going on. Also you can define different machines on **iphone and ipad** for the same viewController.
+
+Great thing about this is that it reduces code nedded for animations to few lines.
 
 ```objective-c
 [self initializeAnimationStateMachineWithDelegate:self];
@@ -128,7 +131,7 @@ transformationId
 
 ####Naming
 
-After you have the json structure, you have to add JSON to your resources, you name it like this **animation\_className\_[iphone|ipad].json**. So if your class is SKExampleViewController and you use it for iphone, your JSON will be named `animation_SKExampleViewController_iphone.json`.</br>
+After you have the json structure, you have to add JSON to your resources, you name it like this **animation\_className\_[iphone|ipad].json**. So if your class is SKExampleViewController and you use it for iphone, your JSON will be named `animation_SKExampleViewController_iphone.json`.
 
 If you are running your app on ipad and don't have …_ipad.json file it will fallback to iphone file and vice versa.
 
