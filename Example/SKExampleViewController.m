@@ -38,7 +38,7 @@
     [self.view addSubview:view2];
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 400, 100, 50)];
-    [button setTitle:@"Press" forState:UIControlStateNormal];
+    [button setTitle:@"Stop red square" forState:UIControlStateNormal];
     button.backgroundColor = [UIColor greenColor];
     [button addTarget:self 
                action:@selector(buttonPressed:) 
@@ -52,6 +52,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self performTransition:@"forward" onMachine:@"machine1"];
+    [self performTransition:@"forward" onMachine:@"machine2"];
 }
 
 - (void)viewDidUnload
