@@ -20,7 +20,7 @@
     [super viewDidLoad];
 
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor blackColor];
+    view.backgroundColor = [UIColor whiteColor];
     view.frame = CGRectMake(100, 100, 100, 100);
     view.tag = 1;
     [self.view addSubview:view];
